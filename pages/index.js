@@ -63,15 +63,15 @@ const Home = ({ posts }) => {
   )
 }
 
-export const getServerSideProps = async () => {
-  const posts = await fetch(
-    'https://medium-clone-gg88tbqfc-vuqartagiyev.vercel.app/api/posts'
-  ).then((res) => res.json())
-  return {
-    props: {
-      posts,
-    },
-  }
-}
+// export const getServerSideProps = async () => {
+//   const posts = await fetch(
+//     'https://medium-clone-gg88tbqfc-vuqartagiyev.vercel.app/api/posts'
+//   ).then((res) => res.json())
+//   return {
+//     props: {
+//       posts,
+//     },
+//   }
+// }
 
 export default Home
