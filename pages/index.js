@@ -64,18 +64,12 @@ const Home = ({ posts }) => {
 }
 
 export const getServerSideProps = async () => {
-  const posts = await fetch('http://localhost:3000/api/posts').then((res) =>
-    res.json()
-  )
-  posts && posts.length > 0
+  const posts = await fetch(
+    'https://medium-clone-gg88tbqfc-vuqartagiyev.vercel.app/api/posts'
+  ).then((res) => res.json())
   return {
     props: {
       posts,
-    },
-  }
-  return {
-    params: {
-      status: 'loading...',
     },
   }
 }
