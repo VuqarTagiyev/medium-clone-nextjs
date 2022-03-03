@@ -65,7 +65,7 @@ const Home = ({ posts }) => {
 
 export const getServerSideProps = async () => {
   const posts = await fetch(
-    'https://jsonplaceholder.typicode.com/todos/1'
+    'https://medium-clone-gg88tbqfc-vuqartagiyev.vercel.app/api/posts'
   ).then((res) => res.json())
   return {
     props: {
