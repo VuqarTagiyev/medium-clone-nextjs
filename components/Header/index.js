@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -20,12 +20,14 @@ const Header = () => {
         </div>
       </div>
       <div className="flex items-center space-x-5 text-green-600">
-        <h3 className="cursor-pointer rounded-full border border-green-600 px-4 py-1 transition hover:bg-green-600 hover:text-white">
-          Post
-        </h3>
+        <Link href="/create">
+          <a className="cursor-pointer rounded-full border border-green-600 px-4 py-1 transition hover:bg-green-600 hover:text-white">
+            Share Article now
+          </a>
+        </Link>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

@@ -1,10 +1,17 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Header from '../components/Header'
-import Link from 'next/link'
+import Head from "next/head";
+import Header from "../components/Header";
+import { useEffect, useContext, useState } from "react";
+import Context from "../context";
+import { getArticles } from "./../firebase/utils/getArticles";
+import Articles from "../components/Articles";
 
-const Home = ({ posts }) => {
-  console.log(posts)
+const Home = () => {
+  const { articles, articlesDispatch } = useContext(Context);
+
+  useEffect(() => {
+    getArticles(articlesDispatch);
+  }, []);
+
   return (
     <div className="mx-auto max-w-7xl">
       <Head>
@@ -17,7 +24,7 @@ const Home = ({ posts }) => {
           <h1 className="max-w-xl font-serif text-6xl">
             <span className="underline decoration-black decoration-4">
               Medium
-            </span>{' '}
+            </span>{" "}
             is a place to write, read, and connect
           </h1>
           <h2 className="">
@@ -32,48 +39,11 @@ const Home = ({ posts }) => {
         />
       </div>
 
-      {/* Posts */}
+      {/* Articles */}
 
-      <div className="grap-3 md:grap-6 grid grid-cols-1 p-2 sm:grid-cols-2 md:p-6 lg:grid-cols-3">
-        <Link href="/post/1">
-          <div className="group cursor-pointer overflow-hidden rounded-lg border">
-            <img
-              className="h-60 w-full object-cover transition-transform duration-200 ease-in-out group-hover:scale-105"
-              src="https://images.unsplash.com/photo-1607207685777-0986a1eede0e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
-              alt=""
-            />
-            <div className="flex justify-between bg-white p-5">
-              <div>
-                <p className="text-lg font-bold">Title</p>
-                <p className="text-xs">
-                  Description by <span>Author</span>
-                </p>
-              </div>
-
-              <img
-                className="h-12 w-12 rounded-full"
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-                alt=""
-              />
-            </div>
-          </div>
-        </Link>
-      </div>
+      <Articles articles={articles} />
     </div>
-  )
-}
+  );
+};
 
-export const getServerSideProps = async () => {
-  const posts = await fetch(
-    'https://medium-clone-gg88tbqfc-vuqartagiyev.vercel.app/api/posts'
-  ).then((res) => res.json())
-  return {
-    props: {
-      posts,
-    },
-  }
-}
-
-// https://medium-clone-gg88tbqfc-vuqartagiyev.vercel.app/api/posts
-
-export default Home
+export default Home;
