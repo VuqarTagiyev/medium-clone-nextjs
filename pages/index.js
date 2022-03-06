@@ -1,17 +1,9 @@
 import Head from "next/head";
 import Header from "../components/Header";
-import { useEffect, useContext, useState } from "react";
-import Context from "../context";
-import { getArticles } from "./../firebase/utils/getArticles";
 import Articles from "../components/Articles";
+import { server } from "../config";
 
-const Home = () => {
-  const { articles, articlesDispatch } = useContext(Context);
-
-  useEffect(() => {
-    getArticles(articlesDispatch);
-  }, []);
-
+const Home = ({ articles }) => {
   return (
     <div className="mx-auto max-w-7xl">
       <Head>
@@ -44,6 +36,19 @@ const Home = () => {
       <Articles articles={articles} />
     </div>
   );
+};
+
+export const getStaticProps = async () => {
+  const articles = await fetch(`${server}/api/articles`).then((res) =>
+    res.json()
+  );
+
+  return {
+    props: {
+      articles,
+    },
+    revalidate: 60,
+  };
 };
 
 export default Home;

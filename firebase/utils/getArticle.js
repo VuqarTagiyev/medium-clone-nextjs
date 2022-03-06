@@ -1,16 +1,15 @@
 import { ref, get, child } from "@firebase/database";
 import { db } from "../index";
 
-// action
-import { actions } from "../../context/actions/articles";
-
-export const getArticle = (articlesDispatch, id) => {
+export const getArticle = (slug) => {
   const dbRef = ref(db);
-  const data = {};
-  get(child(dbRef, "articles/")).then((res) => {
-    if (res.exists()) {
-      const data = res.val();
-      articlesDispatch(actions.getArticle(data[id]));
-    }
+
+  return new Promise((resolve) => {
+    get(child(dbRef, "articles/")).then((res) => {
+      if (res.exists()) {
+        const data = res.val();
+        resolve(data[slug]);
+      }
+    });
   });
 };

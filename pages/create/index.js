@@ -178,7 +178,7 @@ const Create = () => {
             ></path>
           </svg>
           <div className="ml-3 text-sm font-medium text-green-700">
-            Article successfully shared.{" "}
+            It will be shared in 60 seconds{" "}
             <Link href="/">
               <a href="#" class="font-semibold underline hover:text-green-800">
                 Main page
