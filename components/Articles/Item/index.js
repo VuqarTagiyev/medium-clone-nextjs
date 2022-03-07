@@ -22,7 +22,8 @@ const Item = ({ item }) => {
           <div>
             <p className="text-lg font-bold">{item.title}</p>
             <p className="text-xs">
-              {item.article.slice(0, 30)}... by <span>Author</span>
+              {item.article.slice(0, 30)}... by{" "}
+              <span className="text-green-500">{item.creator}</span>
             </p>
           </div>
 
