@@ -4,7 +4,10 @@ import Image from "next/image";
 
 const Item = ({ item }) => {
   return (
-    <Link href="/post/id" as={`/post/${convertSlug(item.title)}-${item._id}`}>
+    <Link
+      href="/post/[slug]"
+      as={`/post/${convertSlug(item.title)}-${item._id}`}
+    >
       <div className="group cursor-pointer overflow-hidden rounded-lg border m-2">
         <div className="relative h-60 w-full object-cover transition-transform duration-200 ease-in-out group-hover:scale-105">
           <Image
