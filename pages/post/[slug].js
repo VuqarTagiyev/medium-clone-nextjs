@@ -1,34 +1,50 @@
 import Header from "./../../components/Header";
 import { server } from "../../config";
 import { convertSlug } from "../../components/Utils/convertSlug";
+import Image from "next/image";
 const Post = ({ article }) => {
   return (
     <main>
       <Header />
-      <img className="h-40 w-full object-cover" src={article?.image} alt="" />
-
+      <div className="relative h-40 w-full object-cover">
+        <Image
+          src={article?.image}
+          layout="fill"
+          objectFit="cover"
+          blurDataURL="data:..."
+          placeholder="blur"
+        />
+      </div>
       <article className="mx-auto max-w-3xl p-5">
         <h1 className="mt-10 mb-3 text-3xl">{article?.title}</h1>
         <h2 className="mb-2 text-xl font-light text-gray-500">
           {article?.article.slice(0, 30)}
         </h2>
         <div className="flex items-center space-x-2">
-          <img
-            className="h-10 w-10 rounded-full object-cover"
-            src={article?.creatorImage}
-            alt=""
-          />
+          <div className="relative overflow-hidden h-10 w-10 rounded-full object-cover">
+            <Image
+              src={article?.creatorImage}
+              layout="fill"
+              objectFit="cover"
+              blurDataURL="data:..."
+              placeholder="blur"
+            />
+          </div>
           <p className="text-sm font-extralight">
             Blog post by{" "}
             <span className="text-green-600">{article?.creator}</span> -
             Published at {new Date(article?.created_at).toDateString()}
           </p>
         </div>
-        <img
-          src={article?.image}
-          alt="article image"
-          className="w-full object-cover shadow mt-4 rounded-xl"
-        />
+        <div className="relative w-full h-96 object-cover shadow mt-4 rounded-xl">
+          <Image
+            src={article?.image}
+            layout="fill"
+            objectFit="cover"
+            blurDataURL="data:..."
+            placeholder="blur"
+          />
+        </div>
         <div className="mt-10">{article?.article}</div>
       </article>
 
